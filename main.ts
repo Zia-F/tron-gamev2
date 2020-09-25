@@ -35,13 +35,13 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         if (Math.percentChance(50)) {
             xVel = randint(-50, 50)
             yVel = randint(20 + deltaSpeed, 50 + deltaSpeed)
-            asteroid.setPosition(randint(num - -90, num + 90), num2 - 74)
+            asteroid.setPosition(randint(num - 50, num + 50), num2 - 80)
             asteroid.vx = xVel
             asteroid.vy = yVel
         } else {
             xVel = randint(-50, 50)
             yVel = randint(-50 - deltaSpeed, -20 - deltaSpeed)
-            asteroid.setPosition(randint(num - -90, num + 90), num2 + 74)
+            asteroid.setPosition(randint(num - 50, num + 50), num2 + 80)
             asteroid.vx = xVel
             asteroid.vy = yVel
         }
@@ -49,13 +49,13 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         if (Math.percentChance(50)) {
             xVel = randint(20 + deltaSpeed, 50 + deltaSpeed)
             yVel = randint(-50, 50)
-            asteroid.setPosition(num - 90, randint(num2 - -74, num2 + 74))
+            asteroid.setPosition(num - 80, randint(num2 - 50, num2 + 50))
             asteroid.vx = xVel
             asteroid.vy = yVel
         } else {
             xVel = randint(-50 - deltaSpeed, -20 - deltaSpeed)
             yVel = randint(-50, 50)
-            asteroid.setPosition(num + 90, randint(num2 - 74, num2 + 74))
+            asteroid.setPosition(num + 80, randint(num2 - 50, num2 + 50))
             asteroid.vx = xVel
             asteroid.vy = yVel
         }
