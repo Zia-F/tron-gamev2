@@ -329,6 +329,9 @@ game.onUpdate(function () {
         ship.startEffect(effects.fire)
     }
 })
+game.onUpdateInterval(1000, function () {
+    info.changeScoreBy(1)
+})
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
     generateAsteroids(ship.x, ship.y, deltaSpeed)
 })
