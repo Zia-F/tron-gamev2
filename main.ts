@@ -244,8 +244,7 @@ let blackHole = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.BlackHole)
-let asteroidSpawnSpeed = 250
-ship.startEffect(effects.fire)
+let asteroidSpawnSpeed = 400
 deltaSpeed = 0
 game.onUpdate(function () {
     if (ship.vx < 0) {
@@ -324,6 +323,10 @@ game.onUpdate(function () {
             . . . . 2 2 . 1 1 . 2 2 . . . . 
             . . . . . . . 4 4 . . . . . . . 
             `)
+    }
+    effects.clearParticles(ship)
+    if (Math.abs(ship.vx) + Math.abs(ship.vy) != 0) {
+        ship.startEffect(effects.fire)
     }
 })
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
