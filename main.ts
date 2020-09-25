@@ -37,7 +37,7 @@ function generateAsteroids (num: number, num2: number, num3: number) {
     if (Math.percentChance(50)) {
         xVel = xVel * -1
     }
-    asteroid.setPosition(randint(10, scene.screenWidth() - 10), num3)
+    asteroid.setPosition(randint(num - 50, scene.screenWidth() - (num + 50)), randint(num2, scene.screenWidth() - (num2 + 50)))
     asteroid.vx = xVel
     asteroid.vy = yVel
 }
@@ -226,9 +226,9 @@ let blackHole = sprites.create(img`
 let asteroidSpawnSpeed = 1000
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
     if (Math.percentChance(50)) {
-        generateAsteroids(10, 50, 0)
+        generateAsteroids(ship.x, ship.y, 0)
     }
     if (Math.percentChance(50)) {
-        generateAsteroids(-10, -50, scene.screenHeight())
+        generateAsteroids(ship.x, ship.y, 0)
     }
 })
