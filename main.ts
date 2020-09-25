@@ -36,21 +36,21 @@ function generateAsteroids (num: number, num2: number, num3: number) {
     if (random == 1) {
         xVel = randint(-10, 10)
         yVel = randint(20, 50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 - 100)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 - 80)
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
     if (random == 2) {
         xVel = randint(-10, 10)
         yVel = randint(-20, -50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 + 100)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 + 80)
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
     if (random == 3) {
         xVel = randint(-10, -30)
         yVel = randint(-10, 10)
-        asteroid.setPosition(num + 100, randint(num2 - 30, num2 + 30))
+        asteroid.setPosition(num + 80, randint(num2 - 30, num2 + 30))
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
