@@ -34,30 +34,30 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         `, SpriteKind.Enemy)
     random = randint(1, 4)
     if (random == 1) {
-        xVel = randint(-50, 50)
+        xVel = randint(-10, 10)
         yVel = randint(20, 50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 - 50)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 - 100)
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
     if (random == 2) {
-        xVel = randint(-50, 50)
+        xVel = randint(-10, 10)
         yVel = randint(-20, -50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 + 50)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 + 100)
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
     if (random == 3) {
         xVel = randint(-10, -30)
-        yVel = randint(-40, 40)
-        asteroid.setPosition(num + 50, randint(num2 - 30, num2 + 30))
+        yVel = randint(-10, 10)
+        asteroid.setPosition(num + 100, randint(num2 - 30, num2 + 30))
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
     if (random == 4) {
         xVel = randint(10, 30)
-        yVel = randint(-40, 40)
-        asteroid.setPosition(num - 50, randint(num2 - 30, num2 + 30))
+        yVel = randint(-10, 10)
+        asteroid.setPosition(num - 100, randint(num2 - 30, num2 + 30))
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
@@ -247,7 +247,7 @@ let blackHole = sprites.create(img`
     `, SpriteKind.BlackHole)
 let asteroidSpawnSpeed = 1000
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
-    if (Math.percentChance(80)) {
+    if (Math.percentChance(95)) {
         generateAsteroids(ship.x, ship.y, 0)
     }
 })
