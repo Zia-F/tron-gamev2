@@ -34,28 +34,28 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         `, SpriteKind.Enemy)
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
-            xVel = randint(-50, 50)
-            yVel = randint(20, 50)
+            xVel = randint(-50 - deltaSpeed, 50 + deltaSpeed)
+            yVel = randint(20 + deltaSpeed, 50 + deltaSpeed)
             asteroid.setPosition(randint(num - -90, num + 90), num2 - 74)
             asteroid.vx = xVel
             asteroid.vy = yVel
         } else {
-            xVel = randint(-50, 50)
-            yVel = randint(-20, -50)
+            xVel = randint(-50 - deltaSpeed, 50 + deltaSpeed)
+            yVel = randint(-50 - deltaSpeed, -20 - deltaSpeed)
             asteroid.setPosition(randint(num - -90, num + 90), num2 + 74)
             asteroid.vx = xVel
             asteroid.vy = yVel
         }
     } else {
         if (Math.percentChance(50)) {
-            xVel = randint(20, 50)
-            yVel = randint(-50, 50)
+            xVel = randint(20 + deltaSpeed, 50 + deltaSpeed)
+            yVel = randint(-50 - deltaSpeed, 50 + deltaSpeed)
             asteroid.setPosition(num - 90, randint(num2 - -74, num2 + 74))
             asteroid.vx = xVel
             asteroid.vy = yVel
         } else {
-            xVel = randint(-20, -50)
-            yVel = randint(-50, 50)
+            xVel = randint(-50 - deltaSpeed, -20 - deltaSpeed)
+            yVel = randint(-50 - deltaSpeed, 50 + deltaSpeed)
             asteroid.setPosition(num + 90, randint(num2 - 74, num2 + 74))
             asteroid.vx = xVel
             asteroid.vy = yVel
@@ -74,6 +74,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let yVel = 0
 let xVel = 0
 let asteroid: Sprite = null
+let deltaSpeed = 0
 let ship = sprites.create(img`
     . . . . . . . 7 7 . . . . . . . 
     . . . . . . 1 1 1 1 . . . . . . 
@@ -244,7 +245,9 @@ let blackHole = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.BlackHole)
-let asteroidSpawnSpeed = 250
+let asteroidSpawnSpeed = 600
+ship.startEffect(effects.fire)
+deltaSpeed = 0
 game.onUpdate(function () {
     if (ship.vx < 0) {
         ship.setImage(img`
@@ -325,5 +328,10 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
-    generateAsteroids(ship.x, ship.y, 0)
+    generateAsteroids(ship.x, ship.y, deltaSpeed)
+})
+game.onUpdateInterval(10000, function () {
+    asteroidSpawnSpeed += -150
+    scene.cameraShake(15, 500)
+    deltaSpeed += 15
 })
