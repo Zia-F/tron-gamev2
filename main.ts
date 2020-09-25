@@ -32,14 +32,13 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
-    xVel = randint(10, 50)
-    yVel = randint(num, num2)
+    xVel = randint(-50, 50)
+    yVel = randint(-50, 50)
     if (Math.percentChance(50)) {
-        xVel = xVel * -1
+        asteroid.setPosition(randint(num - 50, num + 50), num2 + 50)
+        asteroid.vx = xVel
+        asteroid.vy = yVel * -1
     }
-    asteroid.setPosition(randint(num - 50, num + 50), randint(num2 - 50, num2 + 50))
-    asteroid.vx = xVel
-    asteroid.vy = yVel
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BlackHole, function (sprite, otherSprite) {
     sprite.destroy(effects.spray, 200)
