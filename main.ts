@@ -47,9 +47,16 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         asteroid.vy = yVel
     }
     if (Math.percentChance(50)) {
-        xVel = randint(-50, 50)
-        yVel = randint(-20, -50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 + 50)
+        xVel = randint(-10, -30)
+        yVel = randint(-40, 40)
+        asteroid.setPosition(num + 50, randint(num2 - 30, num2 + 30))
+        asteroid.vx = xVel
+        asteroid.vy = yVel
+    }
+    if (Math.percentChance(50)) {
+        xVel = randint(10, 30)
+        yVel = randint(-40, 40)
+        asteroid.setPosition(num - 50, randint(num2 - 30, num2 + 30))
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
