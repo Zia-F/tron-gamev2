@@ -32,34 +32,34 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
-    random = randint(1, 4)
-    if (random == 1) {
-        xVel = randint(-10, 10)
-        yVel = randint(20, 50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 - 80)
-        asteroid.vx = xVel
-        asteroid.vy = yVel
-    }
-    if (random == 2) {
-        xVel = randint(-10, 10)
-        yVel = randint(-20, -50)
-        asteroid.setPosition(randint(num - 30, num + 30), num2 + 80)
-        asteroid.vx = xVel
-        asteroid.vy = yVel
-    }
-    if (random == 3) {
-        xVel = randint(-10, -30)
-        yVel = randint(-10, 10)
-        asteroid.setPosition(num + 80, randint(num2 - 30, num2 + 30))
-        asteroid.vx = xVel
-        asteroid.vy = yVel
-    }
-    if (random == 4) {
-        xVel = randint(10, 30)
-        yVel = randint(-10, 10)
-        asteroid.setPosition(num - 100, randint(num2 - 30, num2 + 30))
-        asteroid.vx = xVel
-        asteroid.vy = yVel
+    if (Math.percentChance(50)) {
+        if (Math.percentChance(50)) {
+            xVel = randint(-50, 50)
+            yVel = randint(20, 50)
+            asteroid.setPosition(randint(num - -90, num + 90), num2 - 74)
+            asteroid.vx = xVel
+            asteroid.vy = yVel
+        } else {
+            xVel = randint(-50, 50)
+            yVel = randint(-20, -50)
+            asteroid.setPosition(randint(num - -90, num + 90), num2 + 74)
+            asteroid.vx = xVel
+            asteroid.vy = yVel
+        }
+    } else {
+        if (Math.percentChance(50)) {
+            xVel = randint(20, 50)
+            yVel = randint(-50, 50)
+            asteroid.setPosition(num - 90, randint(num2 - -74, num2 + 74))
+            asteroid.vx = xVel
+            asteroid.vy = yVel
+        } else {
+            xVel = randint(-20, -50)
+            yVel = randint(-50, 50)
+            asteroid.setPosition(num + 90, randint(num2 - 74, num2 + 74))
+            asteroid.vx = xVel
+            asteroid.vy = yVel
+        }
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BlackHole, function (sprite, otherSprite) {
@@ -73,7 +73,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let yVel = 0
 let xVel = 0
-let random = 0
 let asteroid: Sprite = null
 let ship = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -245,15 +244,7 @@ let blackHole = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.BlackHole)
-let asteroidSpawnSpeed = 1000
+let asteroidSpawnSpeed = 250
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
-    if (Math.percentChance(100)) {
-        generateAsteroids(ship.x, ship.y, 0)
-    }
-    if (Math.percentChance(100)) {
-        generateAsteroids(ship.x, ship.y, 0)
-    }
-    if (Math.percentChance(100)) {
-        generateAsteroids(ship.x, ship.y, 0)
-    }
+    generateAsteroids(ship.x, ship.y, 0)
 })
