@@ -245,7 +245,7 @@ let blackHole = sprites.create(img`
     `, SpriteKind.BlackHole)
 let asteroidSpawnSpeed = 1000
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
-    if (Math.percentChance(50)) {
+    if (Math.percentChance(80)) {
         generateAsteroids(ship.x, ship.y, 0)
     }
 })
