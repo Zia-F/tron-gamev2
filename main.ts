@@ -9,9 +9,6 @@ namespace SpriteKind {
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.BlackHole, function (sprite, otherSprite) {
     sprite.destroy(effects.spray, 200)
 })
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
-	
-})
 function generateAsteroids (num: number, num2: number, num3: number) {
     asteroid = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -31,6 +28,7 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
+    list.unshift(asteroid)
     if (Math.percentChance(50)) {
         if (Math.percentChance(50)) {
             xVel = randint(-50, 50)
@@ -73,6 +71,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let yVel = 0
 let xVel = 0
 let asteroid: Sprite = null
+let list: Sprite[] = []
 let deltaSpeed = 0
 let ship = sprites.create(img`
     . . . . . . . 7 7 . . . . . . . 
@@ -244,8 +243,9 @@ let blackHole = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.BlackHole)
-let asteroidSpawnSpeed = 400
+let asteroidSpawnSpeed = 600
 deltaSpeed = 0
+list = []
 game.onUpdate(function () {
     if (ship.vx < 0) {
         ship.setImage(img`
@@ -336,7 +336,10 @@ game.onUpdateInterval(asteroidSpawnSpeed, function () {
     generateAsteroids(ship.x, ship.y, deltaSpeed)
 })
 game.onUpdateInterval(10000, function () {
-    asteroidSpawnSpeed = asteroidSpawnSpeed - 50
+    asteroidSpawnSpeed = asteroidSpawnSpeed - 75
     scene.cameraShake(15, 500)
     deltaSpeed += 15
+    for (let value of list) {
+        value.destroy()
+    }
 })
