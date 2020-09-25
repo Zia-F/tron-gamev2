@@ -1,0 +1,89 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
+namespace SpriteKind {
+    export const BlackHole = SpriteKind.create()
+}
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.BlackHole, function (sprite, otherSprite) {
+    sprite.destroy(effects.spray, 200)
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprite.destroy(effects.spray, 500)
+    otherSprite.destroy(effects.spray, 500)
+})
+function generateAsteroids (num: number, num2: number, num3: number) {
+    asteroid = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . e e e e . 
+        . . . . e e d e e e e e e e e . 
+        . . . . e d d d b e b b f f e . 
+        . . . e e d e b f f b b b f e . 
+        . . . e d d b f f f f b b b . . 
+        . . e d d b b f f f f b e e e . 
+        . . e e e b b f e f e e e e e . 
+        . . e e e d b f e e e e e e e . 
+        . . e e e d f f e e e e e e . . 
+        . . . . e d d f e e e e . . . . 
+        . . . . e e d d d d e e . . . . 
+        . . . . . e e e e e e . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    xVel = randint(10, 50)
+    yVel = randint(num, num2)
+    if (Math.percentChance(50)) {
+        xVel = xVel * -1
+    }
+    asteroid.setPosition(randint(10, scene.screenWidth() - 10), num3)
+    asteroid.vx = xVel
+    asteroid.vy = yVel
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.BlackHole, function (sprite, otherSprite) {
+    sprite.destroy(effects.spray, 200)
+    game.over(false)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.spray, 500)
+})
+let yVel = 0
+let xVel = 0
+let asteroid: Sprite = null
+effects.starField.startScreenEffect()
+let blackHole = sprites.create(img`
+    ........................
+    .........ff.............
+    .......caf..cc..c.......
+    ......fc...c....a1......
+    ....c.c..........c.c....
+    ...a......cccaa..c..1...
+    ............aa.a..c.1...
+    ..c.c.a..c.aa.......a...
+    ..ff.a.....c...c....cc..
+    ..f..ca...aca....a......
+    ..a..cac.ccfca...1..a...
+    .ca..c.cacfff1aa.1..a...
+    .ac..c...acf1a.aa1...1..
+    .cc.......aaa...aa...c..
+    ..c....cc..a..c..a..cc..
+    ..........aa.c..a...c...
+    .......a.aa........c....
+    ........cccaa....c1.....
+    .....c..........c.......
+    .....cc.......cc..c.....
+    ......aaffc..cc11.......
+    ........................
+    ........................
+    ........................
+    `, SpriteKind.BlackHole)
+let asteroidSpawnSpeed = 1000
+game.onUpdateInterval(asteroidSpawnSpeed, function () {
+    if (Math.percentChance(50)) {
+        generateAsteroids(10, 50, 0)
+    }
+    if (Math.percentChance(50)) {
+        generateAsteroids(-10, -50, scene.screenHeight())
+    }
+})
