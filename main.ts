@@ -34,8 +34,15 @@ function generateAsteroids (num: number, num2: number, num3: number) {
         `, SpriteKind.Enemy)
     if (Math.percentChance(50)) {
         xVel = randint(-50, 50)
-        yVel = randint(10, 50)
-        asteroid.setPosition(randint(num - 50, num + 50), num2 - 50)
+        yVel = randint(20, 50)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 - 50)
+        asteroid.vx = xVel
+        asteroid.vy = yVel
+    }
+    if (Math.percentChance(50)) {
+        xVel = randint(-50, 50)
+        yVel = randint(20, 50)
+        asteroid.setPosition(randint(num - 30, num + 30), num2 - 50)
         asteroid.vx = xVel
         asteroid.vy = yVel
     }
@@ -224,9 +231,6 @@ let blackHole = sprites.create(img`
     `, SpriteKind.BlackHole)
 let asteroidSpawnSpeed = 1000
 game.onUpdateInterval(asteroidSpawnSpeed, function () {
-    if (Math.percentChance(50)) {
-        generateAsteroids(ship.x, ship.y, 0)
-    }
     if (Math.percentChance(50)) {
         generateAsteroids(ship.x, ship.y, 0)
     }
