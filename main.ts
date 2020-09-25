@@ -340,6 +340,6 @@ game.onUpdateInterval(10000, function () {
     scene.cameraShake(15, 500)
     deltaSpeed += 15
     for (let value of list) {
-        value.destroy()
+        value.destroy(effects.spray, 500)
     }
 })
